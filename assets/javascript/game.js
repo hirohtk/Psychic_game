@@ -39,6 +39,7 @@ document.onkeyup = function(event) {
     //for (i = 0; i < 2; i++) {
 
 
+    
     if (alphabet.includes(userChoice)) { // If my array alphabet includes my guess, then
         invalidEntryWriter = document.getElementById("invalidEntry");
         invalidEntryWriter.textContent = ""; // so if you DO put a valid letter, string with nothing writes into the span
