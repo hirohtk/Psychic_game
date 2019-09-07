@@ -19,15 +19,29 @@ var invalidEntry = "Invalid Entry"
 // 2. do myVarWriter = document.getElementById("spanIdName")
 // 3. then do myVarWriter.textContet = myVar
 
+var computerChoiceMath = Math.floor(Math.random() * 26); //chooses a number between 0 - 25 
+var computerChoice = alphabet[computerChoiceMath]; // uses number from above to select a letter from the alphabet
+console.log(computerChoice);
+
+
+
+function gameRefresh() {
+    var computerChoiceMath = Math.floor(Math.random() * 26); //chooses a number between 0 - 25 
+    computerChoice = alphabet[computerChoiceMath]; // uses number from above to select a letter from the alphabet
+    console.log(computerChoice);
+
+    userChoiceArray.length = 0; // game ends, so clears the user choice history
+    guessesLeft = 9; //game ends so refreshes this
+}
+
+
+
+
 
 document.onkeyup = function(event) {
 
     //variable userChoice gets event.key
     var userChoice = event.key;
-
-    var computerChoiceMath = Math.floor(Math.random() * 26); //chooses a number between 0 - 25 
-    var computerChoice = alphabet[computerChoiceMath]; // uses number from above to select a letter from the alphabet
-    console.log(computerChoice);
 
      
     // var userChoiceWriter gets userChoice element ID 
@@ -36,8 +50,6 @@ document.onkeyup = function(event) {
     // for some reason, the writer's assignment always goes after
     userChoiceWriter.textContent = userChoice;
 
-    
-    
     
     // Found out I don't even need a loop to do this
 
@@ -97,15 +109,17 @@ document.onkeyup = function(event) {
         function game() {
             if (userChoice === computerChoice) {
                 wins++; 
-                userChoiceArray.length = 0; // game ends, so clears the user choice history
-                guessesLeft = 9; // game ends so refreshes this
+                gameRefresh();
+                
                 
             }
             
-            else if (guessesLeft === 0) {
+            else if (guessesLeft <= 0) {
                 losses++;
-                userChoiceArray.length = 0; // game ends, so clears the user choice history
-                guessesLeft = 9; //game ends so refreshes this
+                //userChoiceArray.length = 0; // game ends, so clears the user choice history
+                // guessesLeft = 9; //game ends so refreshes this
+                gameRefresh();
+                
             }
             else {
                 guessesLeft --;
@@ -126,7 +140,7 @@ document.onkeyup = function(event) {
             lossesWriter.textContent = losses;
         }
        
-
+        
         //break 
     //}
 }
