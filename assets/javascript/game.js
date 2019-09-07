@@ -5,6 +5,8 @@ var guessesLeft = 9
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
 "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
+var userChoiceArray = []
+
 var invalidEntry = "Invalid Entry"
 
 //General formula is for writing a variable to the screen
@@ -33,13 +35,16 @@ document.onkeyup = function(event) {
     // var userChoiceWriter's text gets userchoice, which got event.key
     // for some reason, the writer's assignment always goes after
     userChoiceWriter.textContent = userChoice;
+
+    
+    
     
     // Found out I don't even need a loop to do this
 
     //for (i = 0; i < 2; i++) {
 
 
-    
+
     if (alphabet.includes(userChoice)) { // If my array alphabet includes my guess, then
         invalidEntryWriter = document.getElementById("invalidEntry");
         invalidEntryWriter.textContent = ""; // so if you DO put a valid letter, string with nothing writes into the span
@@ -49,6 +54,7 @@ document.onkeyup = function(event) {
     else {
         invalidEntryWriter = document.getElementById("invalidEntry"); 
         invalidEntryWriter.textContent = invalidEntry;  // so if you DON'T put a valid letter, string with "Invalid Entry" writes into the span
+        
     }
 
 /* Not Quite........... couldn't get this to work, but the above does
@@ -91,19 +97,25 @@ document.onkeyup = function(event) {
         function game() {
             if (userChoice === computerChoice) {
                 wins++; 
+                userChoiceArray.length = 0; // game ends, so clears the user choice history
                 guessesLeft = 9; // game ends so refreshes this
                 
             }
-            else if (guessesLeft < 1) {
-              losses++;
-              guessesLeft = 9; //game ends so refreshes this
-              
+            
+            else if (guessesLeft === 0) {
+                losses++;
+                userChoiceArray.length = 0; // game ends, so clears the user choice history
+                guessesLeft = 9; //game ends so refreshes this
             }
             else {
                 guessesLeft --;
-                
+                var userChoiceArrayWriter = document.getElementById("userChoiceArray"); //created an array for user selection
+                userChoiceArray.push(userChoice); //pushing userChoice from above onto the end of an array
+                userChoiceArrayWriter.textContent = userChoiceArray;
             }
     
+
+            
             var guessLeftWriter = document.getElementById("guessesLeft");
             guessLeftWriter.textContent = guessesLeft  
         
