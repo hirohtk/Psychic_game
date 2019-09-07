@@ -27,7 +27,7 @@ console.log(computerChoice);
 
 function gameRefresh() {
     var computerChoiceMath = Math.floor(Math.random() * 26); //chooses a number between 0 - 25 
-    computerChoice = alphabet[computerChoiceMath]; // uses number from above to select a letter from the alphabet
+    computerChoice = alphabet[computerChoiceMath]; // ***JUST REASSIGNING computerChoice*** DO NOT USE VAR computerChoice, THAT CREATES A NEW VARIABLE.  uses number from above to select a letter from the alphabet
     console.log(computerChoice);
 
     userChoiceArray.length = 0; // game ends, so clears the user choice history
@@ -107,14 +107,14 @@ document.onkeyup = function(event) {
     */    
 
         function game() {
-            if (userChoice === computerChoice) {
+            if (userChoice === computerChoice && guessesLeft !== 0) {
                 wins++; 
                 gameRefresh();
                 
                 
             }
             
-            else if (guessesLeft <= 0) {
+            else if (guessesLeft <= 0 && userChoice !== computerChoice) {
                 losses++;
                 //userChoiceArray.length = 0; // game ends, so clears the user choice history
                 // guessesLeft = 9; //game ends so refreshes this
